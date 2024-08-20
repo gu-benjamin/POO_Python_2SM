@@ -5,7 +5,7 @@
 
 from datetime import date, datetime
 from Pessoa import Endereco, PessoaFisica, PessoaJuridica
-
+  
 
 def main():
 
@@ -13,18 +13,17 @@ def main():
   lista_pj = []
 
   while True:
-
-    opcao = int(input('Escolha uma opção:\n1 - Pessoa Física\n2 - Pessoa Júridica\n0 - Sair\n\nInsira aqui: '))
-    if opcao == 1:
+    opcao = input('Escolha uma opção:\n1 - Pessoa Física\n2 - Pessoa Jurídica\n0 - Sair\n\nInsira aqui: ')
+    if opcao == '1':
       while True: 
-        opcao_pf = int(input('Escolha uma opção:\n1 - Cadastrar Pessoa Física\n2 - Listar Pessoa Física\n0 - Voltar\n\nInsira aqui: '))
+        opcao_pf = input('Escolha uma opção:\n1 - Cadastrar Pessoa Física\n2 - Listar Pessoa Física\n3 - Remover pessoa física\n0 - Voltar\n\nInsira aqui: ')
         # 1 - Cadastrar uma Pessoa Física
-        if opcao_pf == 1:
+        if opcao_pf == '1':
           nova_pf = PessoaFisica()
           novo_end_pf = Endereco()
 
           nova_pf.nome = input('Digite o nome da pessoa física: ')
-          nova_pf.cpf = input('Digite o cpf da pessoa física: ')
+          nova_pf.cpf = input('Digite o cpf da pessoa física: ').strip()
           nova_pf.rendimento = float(input('Digite o rendimento da pessoa física (somente números): '))
 
           data_nascimento = input('Digite a data de nascimento da pessoa física (dd/MM/aaaa): ')
@@ -49,7 +48,7 @@ def main():
           print('Cadastro de pessoa física realizada!')
 
         # Listar pessoa física
-        elif opcao_pf == 2:
+        elif opcao_pf == '2':
           if lista_pf:
             for cada_pf in lista_pf:
               print(f'Nome: {cada_pf.nome}')
@@ -63,25 +62,45 @@ def main():
           else:
             print('Não há pessoas fisicas cadastradas')
         
-        elif opcao_pf == 0:
+        elif opcao_pf == '3':
+          if lista_pf:
+
+            cpf_remover = input('Digite o cpf da pessoa desejada para remove-la da lista: ').strip()
+            pessoa_encontrada = False
+
+            for pf in lista_pf:
+              if pf.cpf == cpf_remover:
+                lista_pf.remove(pf)
+                pessoa_encontrada = True
+                print('Pessoa física removida com sucesso! Pressione qualquer tecla para voltar.')
+                break
+
+            if not pessoa_encontrada:
+              print('Pessoa não encontrada. Pressione qualquer tecla para voltar.\n')
+
+            input()
+          else:
+            print('Impossível realizar ação. Não há pessoas físicas registradas.\n')
+          
+        elif opcao_pf == '0':
           print('Voltando ao menu anterior')
           break
 
         else:
           print('Opção inválida, por favor digite uma das opções indicadas:')
     
-    elif opcao == 2:
+    elif opcao == '2':
       while True: 
-        opcao_pj = int(input('Escolha uma opção:\n1 - Cadastrar Pessoa Júridica\n2 - Listar Pessoa Júridica\n3 - Voltar\n\nInsira aqui: '))
-        # 1 - Cadastrar uma Pessoa Física
-        if opcao_pj == 1:
+        opcao_pj = input('Escolha uma opção:\n1 - Cadastrar Pessoa Jurídica\n2 - Listar Pessoa Jurídica\n3 - Remover Pessoa Jurídica\n0 - Voltar\n\nInsira aqui: ')
+        # 1 - Cadastrar uma Pessoa Jurídica
+        if opcao_pj == '1':
           nova_pj = PessoaJuridica()
           novo_end_pj = Endereco()
 
-          nova_pj.nome = input('Digite o nome da pessoa júridica: ')
-          nova_pj.cnpj = input('Digite o cnpj da pessoa júridica: ')
-          nova_pj.rendimento = float(input('Digite o rendimento da pessoa física (somente números): '))
-          nova_pj.nome_empresa = input('Digite o nome empresa da pessoa')
+          nova_pj.nome = input('Digite o nome da pessoa jurídica: ')
+          nova_pj.cnpj = input('Digite o cnpj da pessoa jurídica: ')
+          nova_pj.rendimento = float(input('Digite o rendimento da pessoa jurídica (somente números): '))
+          nova_pj.nome_empresa = input('Digite o nome empresa da pessoa: ')
 
           novo_end_pj.logradouro = input('Digite o logradouro: ')
           novo_end_pj.numero = input('Digite o número: ')
@@ -92,30 +111,50 @@ def main():
 
           lista_pj.append(nova_pj)
 
-          print('Cadastro de pessoa júridica realizada!')
+          print('Cadastro de pessoa jurídica realizada!')
 
         # Listar pessoa juridica
-        elif opcao_pj == 2:
+        elif opcao_pj == '2':
           if lista_pj:
             for cada_pj in lista_pj:
               print(f'Nome: {cada_pj.nome}')
-              print(f'CPF: {cada_pj.cnpj}')
+              print(f'CNPJ: {cada_pj.cnpj}')
               print(f'Endereço: {cada_pj.endereco.logradouro} {cada_pj.endereco.numero}')
-              print(f'Data Nascimento: {cada_pj.data_nascimento.strftime('%d/%m/%Y')}')
+              print(f'Nome empresa: {cada_pj.nome_empresa}')
               print(f'Imposto a ser pago: {cada_pj.calcular_imposto(cada_pj.rendimento)}')
               print('Digite 0 para sair')
               input()
           else:
-            print('Não há pessoas fisicas cadastradas')
+            print('Não há pessoas jurídicas cadastradas')
+
+        elif opcao_pj == '3':
+          if lista_pj:
+
+            cnpj_remover = input('Digite o cnpj da pessoa desejada para remove-la da lista: ').strip()
+            pj_encontrado = False
+
+            for pj in lista_pj:
+              if pj.cnpj == cnpj_remover:
+                lista_pj.remove(pj)
+                pj_encontrado = True
+                print('Pessoa jurídica removida com sucesso! Pressione qualquer tecla para voltar.')
+                break
+
+            if not pj_encontrado:
+              print('Pessoa não encontrada. Pressione qualquer tecla para voltar.\n')
+
+            input()
+          else:
+            print('Impossível realizar ação. Não há pessoas jurídicas registradas.\n')
         
-        elif opcao_pj == 0:
+        elif opcao_pj == '0':
           print('Voltando ao menu anterior')
           break
 
         else:
           print('Opção inválida, por favor digite uma das opções indicadas:')
 
-    elif opcao == 0:
+    elif opcao == '0':
       print('Programa encerrado. Obrigado por utilizar o sistema!')
       break
 

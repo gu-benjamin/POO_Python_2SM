@@ -57,9 +57,6 @@ class PessoaJuridica(Pessoa):
     if endereco is None:
       # Se nenhum endereco for fornecido, cria um objeto padrão
       endereco = Endereco()
-    
-    if dataNascimento is None:
-      dataNascimento = date.today()
 
     super().__init__(nome, rendimento, endereco)
     # Chamar o construtor da superclasse Pessoa para inicializar os atributos herdados
@@ -72,10 +69,10 @@ class PessoaJuridica(Pessoa):
     if rendimento <= 1500:
       return 0
     # 2% de imposto para rendimento entre 1500 e 3500
-    elif 1500 < rendimento <= 3500:
+    elif 100000 < rendimento <= 200000:
       return rendimento * 0.02
     # 3.5% de imposto para rendimento entre 3500 e 6000
-    elif 3500 < rendimento <= 6000:
+    elif 200000 < rendimento <= 300000:
       return rendimento * 0.035
     # 5% de imposto para rendimento acima de 6000
     else:
