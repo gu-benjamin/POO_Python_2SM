@@ -66,7 +66,7 @@ class PessoaJuridica(Pessoa):
 
   def calcular_imposto(self, rendimento: float) -> float:
     # Sem imposto para rendimento ate 1500
-    if rendimento <= 1500:
+    if rendimento <= 100000:
       return 0
     # 2% de imposto para rendimento entre 1500 e 3500
     elif 100000 < rendimento <= 200000:

@@ -170,7 +170,7 @@ def main():
     
     elif opcao == '2':
       while True: 
-        opcao_pj = input('Escolha uma opção:\n1 - Cadastrar Pessoa Jurídica\n2 - Listar Pessoa Jurídica\n3 - Remover Pessoa Jurídica\n0 - Voltar\n\nInsira aqui: ')
+        opcao_pj = input('Escolha uma opção:\n1 - Cadastrar Pessoa Jurídica\n2 - Listar Pessoa Jurídica\n3 - Remover Pessoa Jurídica\n4 - Atualizar Pessoa Jurídica\n0 - Voltar\n\nInsira aqui: ')
         # 1 - Cadastrar uma Pessoa Jurídica
         if opcao_pj == '1':
           nova_pj = PessoaJuridica()
@@ -233,50 +233,50 @@ def main():
             pj_encontrada = False
 
             for pj in lista_pj:
-              if pj.cpj == cnpj_atualizar:
+              if pj.cnpj == cnpj_atualizar:
                 pj_encontrada = True
-                print('Pessoa Encontra! Selecione a informação que deseja atualizar:\n')
-                print('1 - Nome\n2 - CNPJ\n3 - Data de nascimento\n4 - Rendimento\n5 - Logradouro\n6 - Número Logradouro\n7 - Endereco comercial\n0 - Cancelar Ação\n')
+                print('Pessoa Jurídica encontra! Selecione a informação que deseja atualizar:\n')
+                print('1 - Nome\n2 - CNPJ\n3 - Rendimento\n4 - Nome Empresa\n5 - Logradouro\n6 - Número Logradouro\n7 - Endereco comercial\n0 - Cancelar Ação\n')
 
                 opcao_pj_alt = input('Insira sua opção: ')
-
+                
                 if opcao_pj_alt == '1':
-                  pj.nome = input('Digite o nome da pessoa física: ')
-                  print('Pessoa física atualizada com sucesso! Pressione qualquer tecla para voltar.')
+                  pj.nome = input('Digite o nome da pessoa jurídica: ')
+                  print('Pessoa jurídica atualizada com sucesso! Pressione qualquer tecla para voltar.')
                   break
 
                 elif opcao_pj_alt == '2':
-                  pj.cpj = input('Digite o cnpj da pessoa física: ').strip()
-                  print('Pessoa física atualizada com sucesso! Pressione qualquer tecla para voltar.')
+                  pj.cnpj = input('Digite o cnpj da pessoa jurídica: ').strip()
+                  print('Pessoa jurídica atualizada com sucesso! Pressione qualquer tecla para voltar.')
                   break
 
                 elif opcao_pj_alt == '3':
-
-                  print('Pessoa física atualizada com sucesso! Pressione qualquer tecla para voltar.')
+                  pj.rendimento = float(input('Digite o rendimento da pessoa jurídica (somente números): '))
+                  print('Pessoa jurídica atualizada com sucesso! Pressione qualquer tecla para voltar.')
                   break
 
                 elif opcao_pj_alt == '4':
-                  pj.rendimento = float(input('Digite o rendimento da pessoa física (somente números): '))
-                  print('Pessoa física atualizada com sucesso! Pressione qualquer tecla para voltar.')
+                  pj.nome_empresa = input('Digite o nome empresa da pessoa: ')               
+                  print('Pessoa jurídica atualizada com sucesso! Pressione qualquer tecla para voltar.')
                   break
 
                 elif opcao_pj_alt == '5':
                   pj.endereco.logradouro = input('Digite o logradouro: ')
-                  print('Pessoa física atualizada com sucesso! Pressione qualquer tecla para voltar.')
+                  print('Pessoa jurídica atualizada com sucesso! Pressione qualquer tecla para voltar.')
                   break
 
                 elif opcao_pj_alt == '6':
                   pj.endereco.numero = input('Digite o número: ')
-                  print('Pessoa física atualizada com sucesso! Pressione qualquer tecla para voltar.')
+                  print('Pessoa jurídica atualizada com sucesso! Pressione qualquer tecla para voltar.')
                   break
 
                 elif opcao_pj_alt == '7':
                   end_comercial = input('Este endereço é comercial? S/N: ').strip().upper()
                   pf.endereco.endereco_comercial = end_comercial == 'S'
-                  print('Pessoa física atualizada com sucesso! Pressione qualquer tecla para voltar.')
+                  print('Pessoa jurídica atualizada com sucesso! Pressione qualquer tecla para voltar.')
                   break
 
-                elif opcao_pf_alt == '0':
+                elif opcao_pj_alt == '0':
                   print('Operação cancelada. Pressione qualquer tecla para voltar.')
                   break
 
